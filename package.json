@@ -18,15 +18,28 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration:create": "./node_modules/knex/bin/cli.js --knexpath ./node_modules/knex migrate:make --knexfile knexfile.js",
+    "migration:seed:create": "./node_modules/knex/bin/cli.js --knexpath ./node_modules/knex seed:make --knexfile knexfile.js",
+    "migration:run": "DEBUG=knex:tx ./node_modules/knex/bin/cli.js --knexpath ./node_modules/knex migrate:latest --knexfile knexfile.js",
+    "migration:seed:run": "DEBUG=knex:tx ./node_modules/knex/bin/cli.js --knexpath ./node_modules/knex seed:run --knexfile knexfile.js",
+    "migration:rollback": "./node_modules/knex/bin/cli.js --knexpath ./node_modules/knex migrate:rollback --knexfile knexfile.js",
+    "migration:run:all": "yarn run migration:run && yarn run migration:seed:run"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "dotenv": "^16.4.5",
+    "knex": "2.2.0",
+    "nestjs-knex": "^2.0.0",
+    "pg": "8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "sqlite3": "^5.1.7",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
